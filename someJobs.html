@@ -1,0 +1,1636 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>一些工作</title>
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐂</text></svg>">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+  <style>
+    :root {
+      --border-color: #dee2e6;
+
+      --primary-color: #4361ee;
+      --success-color: #2ecc71;
+      --info-color: #3498db;
+      --danger-color: #e74c3c;
+      --warning-color: #f39c12;
+      --light-bg: #f8f9fa;
+      --plan-color: #4caf50;
+      --text-color: #2c3e50;
+      --text-secondary: #6c757d;
+      --shadow-sm: 0 2px 4px rgba(0, 0, 0, .05);
+      --shadow-md: 0 4px 6px rgba(0, 0, 0, .1);
+      --shadow-lg: 0 10px 15px rgba(0, 0, 0, .1);
+    }
+
+    body {
+      overflow: hidden;
+      height: 100vh;
+      max-height: 100vh;
+      margin: 0;
+      padding: 0;
+      background-color: #f5f7fa;
+      color: var(--text-color);
+      font-family: 'PingFang SC', 'Microsoft YaHei', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+      box-sizing: border-box;
+    }
+
+    .main-container {
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      height: 100vh;
+      max-height: 100vh;
+      margin: 0;
+      padding: 0;
+      background-color: #f5f7fa;
+      box-sizing: border-box;
+    }
+
+    .container {
+      overflow-y: hidden;
+      display: flex;
+      flex: 1;
+      flex-direction: column;
+      height: calc(100% - 30px);
+      max-height: calc(100% - 30px);
+      padding: 20px;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: var(--shadow-sm);
+      box-sizing: border-box;
+    }
+
+    .content-wrapper {
+      overflow: hidden;
+      display: flex;
+      flex: 1;
+      height: calc(100% - 40px);
+      gap: 20px;
+    }
+
+    .left-panel {
+      overflow: hidden;
+      display: flex;
+      flex: 1;
+      flex-direction: column;
+    }
+
+    .right-panel {
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      width: 380px;
+      min-width: 380px;
+      padding-right: 0;
+    }
+
+    .section {
+      margin-bottom: 20px;
+      padding: 0;
+      border-bottom: none;
+    }
+
+    .section:last-child {
+      overflow: hidden;
+      display: flex;
+      flex: 1;
+      flex-direction: column;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .plan-section {
+      margin-bottom: 20px;
+    }
+
+    .common-info-container {
+      margin-bottom: 0;
+      padding: 0;
+    }
+
+    .company-section {
+      overflow: hidden;
+      display: flex;
+      flex: 1;
+      flex-direction: column;
+      padding-bottom: 0;
+    }
+
+    .summary-container {
+      display: none;
+    }
+
+    .table-responsive {
+      overflow: hidden;
+      overflow-x: hidden;
+      display: flex;
+      flex: 1;
+      flex-direction: column;
+      height: 1px;
+      margin: 0 0 15px 0;
+      padding: 0;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      box-sizing: border-box;
+    }
+
+    .summary-content-wrapper {
+      overflow: hidden;
+      display: flex;
+      flex: 1;
+      flex-direction: column;
+      padding: 5px;
+      border: none;
+      background: #fff;
+      border-radius: 0;
+      box-shadow: none;
+    }
+
+    .summary-title {
+      display: flex;
+      align-items: center;
+      flex-shrink: 0;
+      position: relative;
+      margin: 0 0 15px 0;
+      padding-left: 15px;
+      border-bottom: none;
+      background-color: transparent;
+      color: var(--text-color);
+      font-size: 20px;
+      font-weight: 600;
+      border-radius: 0;
+    }
+
+    .summary-title:before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 0;
+      width: 4px;
+      height: 20px;
+      margin-right: 0;
+      background-color: var(--primary-color);
+      transform: translateY(-50%);
+      border-radius: 2px;
+    }
+
+    .summary-content {
+      display: none;
+    }
+
+    .summary-textarea {
+      overflow-y: auto;
+      flex: 1;
+      width: 100%;
+      height: 100%;
+      min-height: 60px;
+      margin: 0;
+      padding: 15px;
+      border: 1px solid #ddd;
+      background-color: #f5f7fd;
+      color: var(--text-color);
+      font-family: inherit;
+      font-size: 14px;
+      line-height: 1.5;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      outline: none;
+      resize: none;
+      transition: all .3s ease;
+      border-radius: 8px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, .05);
+      box-sizing: border-box;
+    }
+
+    .summary-textarea:focus {
+      border-color: var(--primary-color);
+      background-color: #fff;
+      box-shadow: 0 0 0 3px rgba(67, 97, 238, .2);
+    }
+
+    .summary-item {
+      margin-bottom: 12px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .summary-item:last-child {
+      margin-bottom: 0;
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+
+    .summary-item-title {
+      display: block;
+      margin: 0 0 6px 0;
+      padding: 0;
+      color: var(--primary-color);
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 1.3;
+    }
+
+    .summary-item-content {
+      display: block;
+      margin: 0;
+      padding: 0;
+      color: var(--text-color);
+      font-size: 13px;
+      line-height: 1.2;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+    }
+
+    .section.plan-section h2 {
+      margin-left: 0;
+      border-left: none;
+    }
+
+    .section.company-section h2 {
+      margin-left: 0;
+      border-left: none;
+    }
+
+    h2 {
+      display: flex;
+      align-items: center;
+      position: relative;
+      margin-top: 0;
+      margin-bottom: 20px;
+      padding-left: 15px;
+      color: var(--text-color);
+      font-size: 20px;
+      font-weight: 600;
+    }
+
+    h2:before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 0;
+      width: 4px;
+      height: 20px;
+      background-color: var(--info-color);
+      transform: translateY(-50%);
+      border-radius: 2px;
+    }
+
+    .section.plan-section h2:before {
+      background-color: var(--plan-color);
+    }
+
+    .section.company-section h2:before {
+      background-color: var(--info-color);
+    }
+
+    .table-header {
+      position: sticky;
+      z-index: 10;
+      top: 0;
+      width: 100%;
+      background-color: var(--primary-color);
+    }
+
+    .table-body {
+      overflow-x: hidden;
+      overflow-y: auto;
+      flex: 1;
+      width: 100%;
+    }
+
+    table {
+      width: 100%;
+      margin: 0;
+      padding: 0;
+      border: none;
+      font-size: 14px;
+      border-collapse: separate;
+      border-spacing: 0;
+      table-layout: fixed;
+      border-radius: 0;
+      box-shadow: none;
+    }
+
+    th {
+      position: sticky;
+      z-index: 10;
+      top: 0;
+      padding: 12px 8px;
+      background-color: var(--primary-color);
+      color: white;
+      font-size: 14px;
+      font-weight: 500;
+      text-align: center;
+      letter-spacing: .5px;
+    }
+
+    tr:hover {
+      background-color: rgba(67, 97, 238, .04);
+    }
+
+    tr:nth-child(odd) {
+      background-color: #fff;
+    }
+
+    tr:nth-child(even) {
+      background-color: rgba(240, 242, 245, .6);
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    input[type='text'],
+    select {
+      width: 100%;
+      margin: 2px 0;
+      padding: 6px 8px;
+      border: 1px solid #ddd;
+      font-size: 14px;
+      transition: all .3s ease;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+
+    input[type='text']:focus,
+    select:focus {
+      border-color: var(--primary-color);
+      outline: none;
+      box-shadow: 0 0 0 2px rgba(67, 97, 238, .1);
+    }
+
+    input[type='checkbox'] {
+      display: block;
+      position: relative;
+      top: 2px;
+      width: 20px;
+      height: 20px;
+      margin: 0 auto;
+      cursor: pointer;
+
+      accent-color: var(--primary-color);
+    }
+
+    .common-info-textarea {
+      overflow-y: hidden;
+      width: 100%;
+      height: auto;
+      min-height: 60px;
+      padding: 15px;
+      border: 1px solid #ddd;
+      background-color: #f9fff9;
+      font-family: inherit;
+      font-size: 14px;
+      line-height: 1.6;
+      outline: none;
+      resize: none;
+      transition: all .3s ease;
+      border-radius: 8px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, .05);
+      box-sizing: border-box;
+    }
+
+    .common-info-textarea:focus {
+      border-color: var(--plan-color);
+      background-color: #fff;
+      box-shadow: 0 0 0 3px rgba(76, 175, 80, .2);
+    }
+
+    td {
+      padding: 8px;
+    }
+
+    td>* {
+      margin: 2px 0;
+    }
+
+    table#companyTable th:nth-child(1),
+    table#companyTable td:nth-child(1),
+    table#companyTableHeader th:nth-child(1) {
+      width: 50px;
+    }
+
+    table#companyTable th:nth-child(2),
+    table#companyTable td:nth-child(2),
+    table#companyTableHeader th:nth-child(2) {
+      width: 140px;
+    }
+
+    table#companyTable th:nth-child(3),
+    table#companyTable td:nth-child(3),
+    table#companyTableHeader th:nth-child(3) {
+      width: 560px;
+      text-align: center;
+    }
+
+    table#companyTable th:nth-child(4),
+    table#companyTable td:nth-child(4),
+    table#companyTableHeader th:nth-child(4) {
+      width: 60px;
+      text-align: center;
+    }
+
+    table#companyTable th:nth-child(5),
+    table#companyTable td:nth-child(5),
+    table#companyTableHeader th:nth-child(5) {
+      width: 40px;
+      text-align: center;
+    }
+
+    table#companyTable th:nth-child(6),
+    table#companyTable td:nth-child(6),
+    table#companyTableHeader th:nth-child(6) {
+      width: 35px;
+      text-align: center;
+    }
+
+    table#companyTable th:nth-child(7),
+    table#companyTable td:nth-child(7),
+    table#companyTableHeader th:nth-child(7) {
+      width: 35px;
+      vertical-align: middle;
+      text-align: center;
+    }
+
+    .action-cell {
+      text-align: center;
+    }
+
+    td.action-cell {
+      vertical-align: middle;
+      text-align: center;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 8px 16px;
+      border: none;
+      font-size: 16px;
+      cursor: pointer;
+      transition: all .3s ease;
+      border-radius: 6px;
+
+      gap: 6px;
+    }
+
+    .table-btn,
+    .move-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 24px;
+      margin: 0 1px;
+      padding: 0;
+      border: none;
+      background: none;
+      font-size: 18px;
+      cursor: pointer;
+      transition: all .2s ease;
+      border-radius: 50%;
+    }
+
+    .table-btn:hover,
+    .move-btn:hover {
+      background-color: rgba(0, 0, 0, .05);
+      transform: scale(1.1);
+    }
+
+    .table-btn.delete {
+      color: var(--danger-color);
+    }
+
+    .table-btn.confirm {
+      color: var(--success-color);
+    }
+
+    .move-btn.up {
+      color: var(--success-color);
+    }
+
+    .move-btn.down {
+      color: var(--warning-color);
+    }
+
+    .move-btn.disabled {
+      color: #ccc;
+      cursor: not-allowed;
+    }
+
+    .move-btn.disabled:hover {
+      background: none;
+      transform: none;
+    }
+
+    @keyframes moveUp {
+      0% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      50% {
+        opacity: .8;
+        transform: translateY(-5px);
+      }
+
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes moveDown {
+      0% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      50% {
+        opacity: .8;
+        transform: translateY(5px);
+      }
+
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .moving-up {
+      animation: moveUp .2s ease;
+    }
+
+    .moving-down {
+      animation: moveDown .2s ease;
+    }
+
+    .add-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 40px;
+      margin-top: 15px;
+      margin-bottom: 0;
+      border: none;
+      background-color: var(--primary-color);
+      color: white;
+      font-size: 15px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all .3s ease;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(67, 97, 238, .3);
+    }
+
+    .add-btn:hover {
+      background-color: rgba(67, 97, 238, .9);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 12px rgba(67, 97, 238, .4);
+    }
+
+    .floating-buttons {
+      display: flex;
+      flex-direction: column;
+      position: fixed;
+      z-index: 100;
+      right: 25px;
+      bottom: 25px;
+
+      gap: 12px;
+    }
+
+    .floating-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 50px;
+      height: 50px;
+      border: none;
+      color: white;
+      font-size: 20px;
+      cursor: pointer;
+      transition: all .3s cubic-bezier(.4, 0, .2, 1);
+      border-radius: 50%;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, .15);
+
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+    .floating-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, .2);
+    }
+
+    .floating-btn.save {
+      background-color: var(--success-color);
+    }
+
+    .floating-btn.restore {
+      background-color: var(--primary-color);
+    }
+
+    .floating-btn.export {
+      background-color: var(--info-color);
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        margin: 10px;
+        padding: 15px;
+      }
+
+      table {
+        font-size: 13px;
+      }
+
+      th,
+      td {
+        padding: 8px 6px;
+      }
+
+      .floating-buttons {
+        right: 15px;
+        bottom: 15px;
+      }
+
+      .floating-btn {
+        width: 45px;
+        height: 45px;
+        font-size: 18px;
+      }
+
+      .right-panel {
+        height: 300px;
+      }
+
+      body {
+        padding: 0 5px;
+      }
+    }
+
+    @media (max-width: 1200px) {
+      .content-wrapper {
+        flex-direction: column;
+        height: auto;
+      }
+
+      .right-panel {
+        width: 100%;
+        min-width: auto;
+        height: 350px;
+        margin-top: 20px;
+        padding-right: 0;
+      }
+
+      body {
+        padding: 0 10px;
+      }
+    }
+
+    .completed-task {
+      text-decoration: line-through;
+      opacity: .6;
+    }
+
+    @keyframes highlight {
+      0% {
+        background-color: rgba(231, 76, 60, .1);
+      }
+
+      50% {
+        background-color: rgba(231, 76, 60, .2);
+      }
+
+      100% {
+        background-color: rgba(231, 76, 60, .1);
+      }
+    }
+
+    .delete-confirm {
+      animation: highlight 1s ease-in-out infinite;
+    }
+
+    .remark-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      width: 28px;
+      height: 28px;
+      margin: 0 auto;
+      padding: 0;
+      border: 1px solid var(--border-color);
+      background-color: #fff;
+      color: var(--primary-color);
+      font-size: 14px;
+      text-align: center;
+      cursor: pointer;
+      transition: all .3s ease;
+      border-radius: 4px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .remark-btn:hover {
+      border-color: var(--primary-color);
+      background-color: rgba(67, 97, 238, .1);
+      transform: translateY(-1px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .remark-btn.has-content {
+      border-color: var(--primary-color);
+      background-color: var(--primary-color);
+      color: white;
+    }
+
+    .remark-btn.has-content:hover {
+      background-color: rgba(67, 97, 238, .9);
+    }
+
+    .remark-tooltip {
+      display: flex;
+      justify-content: center;
+      width: 100%;
+    }
+
+    .remark-modal {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      position: fixed;
+      z-index: 1000;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, .5);
+    }
+
+    .remark-modal-content {
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      width: 90%;
+      max-width: 600px;
+      max-height: 90vh;
+      padding: 20px;
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, .15);
+    }
+
+    .remark-modal h3 {
+      margin: 0 0 15px 0;
+      color: #333;
+      font-size: 18px;
+    }
+
+    .remark-modal textarea {
+      width: 100%;
+      min-height: 150px;
+      max-height: calc(90vh - 150px);
+      margin: 10px 0;
+      padding: 12px;
+      border: 1px solid #ddd;
+      font-family: inherit;
+      font-size: 14px;
+      line-height: 1.6;
+      resize: vertical;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+
+    .remark-modal textarea:focus {
+      border-color: #4caf50;
+      outline: none;
+      box-shadow: 0 0 8px rgba(76, 175, 80, .2);
+    }
+
+    .remark-modal-buttons {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 15px;
+
+      gap: 10px;
+    }
+
+    .remark-modal button {
+      padding: 8px 16px;
+      border: none;
+      font-size: 14px;
+      cursor: pointer;
+      transition: all .3s ease;
+      border-radius: 4px;
+    }
+
+    .remark-modal .save-btn {
+      background-color: #4caf50;
+      color: white;
+    }
+
+    .remark-modal .cancel-btn {
+      background-color: #f44336;
+      color: white;
+    }
+
+    .remark-modal button:hover {
+      opacity: .9;
+      transform: translateY(-1px);
+    }
+
+    .remark-modal .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      padding: 5px;
+      border: none;
+      background: none;
+      color: #666;
+      font-size: 20px;
+      line-height: 1;
+      cursor: pointer;
+    }
+
+    .remark-modal .close-btn:hover {
+      color: #333;
+    }
+
+    .notifications-container {
+      display: flex;
+      flex-direction: column;
+      position: fixed;
+      z-index: 1000;
+      top: 20px;
+      right: 20px;
+
+      gap: 10px;
+    }
+
+    .notification {
+      display: flex;
+      align-items: center;
+      min-width: 260px;
+      max-width: 320px;
+      padding: 12px 18px;
+      font-size: 15px;
+      font-weight: 500;
+      opacity: 0;
+      transition: all .4s cubic-bezier(.4, 0, .2, 1);
+      transform: translateX(50px);
+      animation: slide-in .4s forwards, slide-out .4s forwards 2.6s;
+      border-radius: 12px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, .2);
+
+      gap: 10px;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+
+    @keyframes slide-in {
+      0% {
+        opacity: 0;
+        transform: translateX(50px);
+      }
+
+      100% {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    @keyframes slide-out {
+      0% {
+        opacity: 1;
+        transform: translateX(0);
+      }
+
+      100% {
+        opacity: 0;
+        transform: translateX(50px);
+      }
+    }
+
+    .notification.success {
+      border-left: 5px solid rgb(39, 174, 96);
+      background-color: rgba(46, 204, 113, .95);
+      color: white;
+    }
+
+    .notification.info {
+      border-left: 5px solid rgb(41, 128, 185);
+      background-color: rgba(52, 152, 219, .95);
+      color: white;
+    }
+
+    .notification.primary {
+      border-left: 5px solid rgb(48, 81, 211);
+      background-color: rgba(67, 97, 238, .95);
+      color: white;
+    }
+
+    .notification.warning {
+      border-left: 5px solid rgb(230, 126, 34);
+      background-color: rgba(243, 156, 18, .95);
+      color: white;
+    }
+
+    .notification.error {
+      border-left: 5px solid rgb(192, 57, 43);
+      background-color: rgba(231, 76, 60, .95);
+      color: white;
+    }
+
+    .notification i {
+      flex-shrink: 0;
+      font-size: 18px;
+    }
+
+    .notification-content {
+      flex-grow: 1;
+    }
+
+    .notification-close {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 24px;
+      padding: 0;
+      border: none;
+      background: none;
+      color: white;
+      font-size: 16px;
+      opacity: .7;
+      cursor: pointer;
+      transition: all .2s ease;
+      border-radius: 50%;
+    }
+
+    .notification-close:hover {
+      background-color: rgba(255, 255, 255, .1);
+      opacity: 1;
+    }
+
+    /* 专门针对外包的样式调整 */
+    table#companyTable td:last-child {
+      position: relative;
+      padding-top: 12px;
+      padding-bottom: 10px;
+      text-align: center;
+    }
+
+    table#companyTable td:last-child input[type='checkbox'] {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin: 0;
+      transform: translate(-50%, -50%);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="main-container">
+    <div class="container">
+      <div id="notificationsContainer" class="notifications-container"></div>
+
+      <div class="content-wrapper">
+        <div class="left-panel">
+          <div class="section plan-section">
+            <h2>常用信息</h2>
+            <div class="common-info-container">
+              <textarea id="commonInfo" class="common-info-textarea" placeholder="在这里输入常用信息..."></textarea>
+            </div>
+          </div>
+
+          <div class="section company-section">
+            <h2>公司信息</h2>
+            <div class="table-responsive">
+              <table id="companyTable">
+                <thead>
+                  <tr>
+                    <th>操作</th>
+                    <th>名称</th>
+                    <th>信息</th>
+                    <th>职位</th>
+                    <th>薪资</th>
+                    <th>记录</th>
+                    <th>外包</th>
+                  </tr>
+                </thead>
+                <tbody>
+                </tbody>
+              </table>
+            </div>
+            <button class="add-btn" onclick="addCompany()"><i class="bi bi-plus-lg"></i></button>
+          </div>
+        </div>
+
+        <div class="right-panel">
+          <div class="summary-content-wrapper">
+            <h2 class="summary-title">记录汇总</h2>
+            <textarea id="summaryTextarea" class="summary-textarea" readonly placeholder="暂无记录"></textarea>
+          </div>
+        </div>
+      </div>
+
+      <div class="floating-buttons">
+        <button class="floating-btn save" onclick="saveData()" title="保存信息">
+          <i class="bi bi-save"></i>
+        </button>
+        <button class="floating-btn restore" onclick="restoreData()" title="恢复信息">
+          <i class="bi bi-arrow-clockwise"></i>
+        </button>
+        <button class="floating-btn export" onclick="exportData()" title="导出为Markdown">
+          <i class="bi bi-clipboard"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div id="remarkModal" class="remark-modal">
+    <div class="remark-modal-content">
+      <button class="close-btn" onclick="closeRemarkModal()">&times;</button>
+      <h3>记录</h3>
+      <textarea id="remarkTextarea" placeholder="请记录..."></textarea>
+      <div class="remark-modal-buttons">
+        <button class="cancel-btn" onclick="closeRemarkModal()">取消</button>
+        <button class="save-btn" onclick="saveRemarkInfo()">保存</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let companyData = JSON.parse(localStorage.getItem("companyData")) || [];
+    let commonInfoData = localStorage.getItem("commonInfoData") || "";
+
+    function renderCommonInfo() {
+      const textarea = document.getElementById("commonInfo");
+      textarea.value = commonInfoData;
+
+      function adjustHeight() {
+        textarea.style.height = 'auto';
+        textarea.style.height = textarea.scrollHeight + 'px';
+      }
+
+      adjustHeight();
+
+      textarea.oninput = () => {
+        commonInfoData = textarea.value;
+        adjustHeight();
+      };
+    }
+
+    let currentRemarkIndex = -1;
+
+    function createRemarkCell(company, index) {
+      const remarkCell = document.createElement("td");
+      const remarkTooltip = document.createElement("div");
+      remarkTooltip.className = "remark-tooltip";
+
+      const remarkBtn = document.createElement("button");
+      remarkBtn.className = "remark-btn";
+      remarkBtn.innerHTML = '<i class="bi bi-pencil-square"></i>';
+      if (company.remark) {
+        remarkBtn.classList.add("has-content");
+      }
+
+      remarkBtn.onclick = () => {
+        currentRemarkIndex = index;
+        const modal = document.getElementById("remarkModal");
+        const textarea = document.getElementById("remarkTextarea");
+        textarea.value = company.remark || "";
+        modal.style.display = "flex";
+        textarea.focus();
+      };
+
+      remarkTooltip.appendChild(remarkBtn);
+      remarkCell.appendChild(remarkTooltip);
+      return remarkCell;
+    }
+
+    function closeRemarkModal() {
+      const modal = document.getElementById("remarkModal");
+      modal.style.display = "none";
+      currentRemarkIndex = -1;
+    }
+
+    function updateSummary() {
+      const summaryTextarea = document.getElementById("summaryTextarea");
+      let summaryText = "";
+
+      companyData.forEach(company => {
+        if (company.remark) {
+          summaryText += `【${company.name || "未命名公司"}】\n${company.remark}\n\n`;
+        }
+      });
+
+      if (!summaryText) {
+        summaryText = "暂无记录";
+      }
+
+      summaryTextarea.value = summaryText.trim();
+    }
+
+    function saveRemarkInfo() {
+      if (currentRemarkIndex === -1) return;
+
+      const textarea = document.getElementById("remarkTextarea");
+      const value = textarea.value.trim();
+
+      companyData[currentRemarkIndex].remark = value;
+
+      const rows = document.querySelectorAll("#companyTable tbody tr");
+      const row = rows[currentRemarkIndex];
+      const btn = row.querySelector(".remark-btn");
+
+      if (value) {
+        btn.classList.add("has-content");
+      } else {
+        btn.classList.remove("has-content");
+      }
+
+      updateSummary();
+      closeRemarkModal();
+      showNotification("记录已保存", "success");
+    }
+
+    function renderCompanyTable() {
+      const tableResponsive = document.querySelector(".table-responsive");
+      tableResponsive.innerHTML = "";
+
+      // 创建表头
+      const tableHeader = document.createElement("div");
+      tableHeader.className = "table-header";
+      const headerTable = document.createElement("table");
+      headerTable.id = "companyTableHeader";
+      headerTable.style.tableLayout = "fixed";
+
+      const thead = document.createElement("thead");
+      const headerRow = document.createElement("tr");
+
+      // 创建表头单元格
+      const headers = ["操作", "名称", "信息", "职位", "薪资", "记录", "外包"];
+      headers.forEach(headerText => {
+        const th = document.createElement("th");
+        th.textContent = headerText;
+        headerRow.appendChild(th);
+      });
+
+      thead.appendChild(headerRow);
+      headerTable.appendChild(thead);
+      tableHeader.appendChild(headerTable);
+
+      // 创建表身
+      const tableBody = document.createElement("div");
+      tableBody.className = "table-body";
+      const bodyTable = document.createElement("table");
+      bodyTable.id = "companyTable";
+      bodyTable.style.tableLayout = "fixed";
+
+      const tbody = document.createElement("tbody");
+
+      if (companyData.length === 0) {
+        const emptyRow = document.createElement("tr");
+        const emptyCell = document.createElement("td");
+        emptyCell.colSpan = 7;
+        emptyCell.textContent = "暂无公司信息，点击下方按钮添加";
+        emptyCell.style.textAlign = "center";
+        emptyCell.style.padding = "20px";
+        emptyCell.style.color = "#888";
+        emptyRow.appendChild(emptyCell);
+        tbody.appendChild(emptyRow);
+      } else {
+        companyData.forEach((company, index) => {
+          const row = document.createElement("tr");
+
+          // 操作按钮单元格
+          const actionCell = document.createElement("td");
+          actionCell.className = "action-cell";
+          actionCell.style.width = "50px";
+
+          // 创建移动按钮容器
+          const moveButtonsContainer = document.createElement("div");
+          moveButtonsContainer.style.display = "flex";
+          moveButtonsContainer.style.justifyContent = "center";
+          moveButtonsContainer.style.gap = "4px";
+
+          // 创建上移按钮
+          const moveUpBtn = document.createElement("button");
+          moveUpBtn.innerHTML = '<i class="bi bi-arrow-up"></i>';
+          moveUpBtn.className = `move-btn up ${index === 0 ? 'disabled' : ''}`;
+          moveUpBtn.title = "上移";
+          moveUpBtn.onclick = () => {
+            if (index > 0) {
+              moveRow(index, -1);
+            }
+          };
+
+          // 创建下移按钮
+          const moveDownBtn = document.createElement("button");
+          moveDownBtn.innerHTML = '<i class="bi bi-arrow-down"></i>';
+          moveDownBtn.className = `move-btn down ${index === companyData.length - 1 ? 'disabled' : ''}`;
+          moveDownBtn.title = "下移";
+          moveDownBtn.onclick = () => {
+            if (index < companyData.length - 1) {
+              moveRow(index, 1);
+            }
+          };
+
+          // 创建删除按钮
+          const deleteBtn = document.createElement("button");
+          deleteBtn.innerHTML = '<i class="bi bi-trash"></i>';
+          deleteBtn.className = "table-btn delete";
+          deleteBtn.title = "删除";
+
+          // 创建删除按钮的点击处理函数
+          function handleDeleteClick() {
+            this.innerHTML = '<i class="bi bi-check-lg"></i>';
+            this.className = "table-btn confirm";
+            this.title = "确认删除";
+            row.classList.add('delete-confirm');
+
+            setTimeout(() => {
+              if (row.classList.contains('delete-confirm')) {
+                this.innerHTML = '<i class="bi bi-trash"></i>';
+                this.className = "table-btn delete";
+                this.title = "删除";
+                row.classList.remove('delete-confirm');
+                this.onclick = handleDeleteClick;
+              }
+            }, 3000);
+
+            this.onclick = function () {
+              if (this.className === "table-btn confirm") {
+                row.classList.remove('delete-confirm');
+                deleteCompany(index);
+              }
+            };
+          }
+
+          deleteBtn.onclick = handleDeleteClick;
+
+          moveButtonsContainer.appendChild(moveUpBtn);
+          moveButtonsContainer.appendChild(moveDownBtn);
+          moveButtonsContainer.appendChild(deleteBtn);
+          actionCell.appendChild(moveButtonsContainer);
+          row.appendChild(actionCell);
+
+          // 名称
+          const nameCell = document.createElement("td");
+          nameCell.style.width = "140px";
+          const nameInput = document.createElement("input");
+          nameInput.type = "text";
+          nameInput.value = company.name || "";
+          nameInput.placeholder = "公司名称";
+          nameInput.oninput = () => updateCompanyData(index, "name", nameInput.value);
+          nameCell.appendChild(nameInput);
+          row.appendChild(nameCell);
+
+          // 信息
+          const infoCell = document.createElement("td");
+          infoCell.style.width = "560px";
+          infoCell.style.textAlign = "center";
+          const infoInput = document.createElement("input");
+          infoInput.type = "text";
+          infoInput.value = company.size || "";
+          infoInput.placeholder = "公司信息";
+          infoInput.oninput = () => updateCompanyData(index, "size", infoInput.value);
+          infoCell.appendChild(infoInput);
+          row.appendChild(infoCell);
+
+          // 职位
+          const positionCell = document.createElement("td");
+          positionCell.style.width = "60px";
+          positionCell.style.textAlign = "center";
+          const positionInput = document.createElement("input");
+          positionInput.type = "text";
+          positionInput.value = company.position || "Java开发";
+          positionInput.placeholder = "职位名称";
+          positionInput.oninput = () => updateCompanyData(index, "position", positionInput.value);
+          positionCell.appendChild(positionInput);
+          row.appendChild(positionCell);
+
+          // 薪资
+          const salaryCell = document.createElement("td");
+          salaryCell.style.width = "60px";
+          salaryCell.style.textAlign = "center";
+          const salaryInput = document.createElement("input");
+          salaryInput.type = "text";
+          salaryInput.value = company.salary || "";
+          salaryInput.placeholder = "薪资范围";
+          salaryInput.oninput = () => updateCompanyData(index, "salary", salaryInput.value);
+          salaryCell.appendChild(salaryInput);
+          row.appendChild(salaryCell);
+
+          // 记录
+          const remarkCell = createRemarkCell(company, index);
+          remarkCell.style.width = "35px";
+          remarkCell.style.textAlign = "center";
+          row.appendChild(remarkCell);
+
+          // 外包
+          const outsourcingCell = document.createElement("td");
+          outsourcingCell.className = "action-cell";
+          outsourcingCell.style.position = "relative";
+          outsourcingCell.style.padding = "8px";
+          outsourcingCell.style.width = "35px";
+          outsourcingCell.style.textAlign = "center";
+          outsourcingCell.style.verticalAlign = "middle";
+
+          const outsourcingCheckbox = document.createElement("input");
+          outsourcingCheckbox.type = "checkbox";
+          outsourcingCheckbox.checked = company.isOutsourcing === undefined ? true : company.isOutsourcing;
+          outsourcingCheckbox.onchange = () => updateCompanyData(index, "isOutsourcing", outsourcingCheckbox
+            .checked);
+          outsourcingCheckbox.style.position = "absolute";
+          outsourcingCheckbox.style.top = "50%";
+          outsourcingCheckbox.style.left = "50%";
+          outsourcingCheckbox.style.transform = "translate(-50%, -50%)";
+          outsourcingCheckbox.style.margin = "0";
+
+          outsourcingCell.appendChild(outsourcingCheckbox);
+          row.appendChild(outsourcingCell);
+
+          tbody.appendChild(row);
+        });
+      }
+
+      bodyTable.appendChild(tbody);
+      tableBody.appendChild(bodyTable);
+
+      // 添加表头和表身到容器
+      tableResponsive.appendChild(tableHeader);
+      tableResponsive.appendChild(tableBody);
+
+      // 设置表头行的列宽与CSS中定义的一致
+      const headerCells = headerTable.querySelectorAll('th');
+      if (headerCells.length > 0) {
+        headerCells[0].style.width = "50px";
+        headerCells[1].style.width = "140px";
+        headerCells[2].style.width = "560px";
+        headerCells[3].style.width = "60px";
+        headerCells[4].style.width = "60px";
+        headerCells[5].style.width = "35px";
+        headerCells[6].style.width = "35px";
+
+        // 设置所有表头单元格为居中对齐
+        headerCells.forEach(cell => {
+          cell.style.textAlign = "center";
+        });
+      }
+    }
+
+    function moveRow(index, direction) {
+      const newIndex = index + direction;
+      if (newIndex < 0 || newIndex >= companyData.length) return;
+
+      const rows = document.querySelectorAll("#companyTable tbody tr");
+      const currentRow = rows[index];
+      const targetRow = rows[newIndex];
+
+      if (direction < 0) {
+        currentRow.classList.add('moving-up');
+      } else {
+        currentRow.classList.add('moving-down');
+      }
+
+      const temp = companyData[index];
+      companyData[index] = companyData[newIndex];
+      companyData[newIndex] = temp;
+
+      setTimeout(() => {
+        renderCompanyTable();
+        showNotification("已移动行", "info");
+      }, 200);
+    }
+
+    function updateCompanyData(index, key, value) {
+      companyData[index][key] = value;
+    }
+
+    function deleteCompany(index) {
+      companyData.splice(index, 1);
+      renderCompanyTable();
+      updateSummary();
+      showNotification("公司信息已删除", "error");
+    }
+
+    function addCompany() {
+      companyData.push({
+        name: "",
+        size: "",
+        position: "Java开发",
+        salary: "",
+        isOutsourcing: true
+      });
+      renderCompanyTable();
+      setTimeout(() => {
+        const inputs = document.querySelectorAll("#companyTable tbody tr:last-child td:nth-child(2) input");
+        if (inputs.length > 0) {
+          inputs[0].focus();
+        }
+      }, 100);
+    }
+
+    function saveData() {
+      localStorage.setItem("companyData", JSON.stringify(companyData));
+      localStorage.setItem("commonInfoData", commonInfoData);
+      showNotification("数据已保存", "success");
+    }
+
+    function restoreData() {
+      const savedCompanyData = localStorage.getItem("companyData");
+      const savedCommonInfoData = localStorage.getItem("commonInfoData");
+
+      let hasRestoredData = false;
+
+      if (savedCompanyData) {
+        try {
+          companyData = JSON.parse(savedCompanyData);
+          renderCompanyTable();
+          updateSummary();
+          hasRestoredData = true;
+        } catch (e) {
+          console.error("恢复公司数据失败", e);
+          showNotification("恢复公司数据失败", "error");
+        }
+      }
+
+      if (savedCommonInfoData) {
+        try {
+          commonInfoData = savedCommonInfoData;
+          renderCommonInfo();
+          hasRestoredData = true;
+        } catch (e) {
+          console.error("恢复常用信息数据失败", e);
+          showNotification("恢复常用信息数据失败", "error");
+        }
+      }
+
+      if (hasRestoredData) {
+        showNotification("数据已恢复", "info");
+      } else {
+        showNotification("没有可恢复的数据", "warning");
+      }
+    }
+
+    function exportData() {
+      let markdown = "# 常用信息\n\n";
+      markdown += commonInfoData + "\n\n";
+
+      markdown += "# 公司列表\n\n";
+      if (companyData.length > 0) {
+        markdown += "| 公司名称 | 信息 | 职位 | 薪资 | 外包 |\n";
+        markdown += "| -------- | ---- | ---- | ---- | -------- |\n";
+
+        companyData.forEach(company => {
+          const name = company.name || "未填写";
+          const info = company.size || "未填写";
+          const position = company.position || "未填写";
+          const salary = company.salary || "未填写";
+          const isOutsourcing = company.isOutsourcing ? "是" : "否";
+
+          markdown += `| ${name} | ${info} | ${position} | ${salary} | ${isOutsourcing} |\n`;
+        });
+      } else {
+        markdown += "暂无公司信息\n";
+      }
+
+      markdown += "\n\n# 记录汇总\n\n";
+      markdown += document.getElementById("summaryTextarea").value;
+
+      copyToClipboard(markdown);
+      showNotification("已复制到剪贴板", "primary");
+    }
+
+    function copyToClipboard(text) {
+      const textarea = document.createElement('textarea');
+      textarea.value = text;
+      textarea.style.position = 'fixed';
+      textarea.style.opacity = 0;
+      document.body.appendChild(textarea);
+      textarea.select();
+      document.execCommand('copy');
+      document.body.removeChild(textarea);
+    }
+
+    let notificationCounter = 0;
+
+    function showNotification(message, type = "info") {
+      const notificationsContainer = document.getElementById("notificationsContainer");
+
+      const notificationId = `notification-${notificationCounter++}`;
+      const notification = document.createElement("div");
+      notification.id = notificationId;
+      notification.className = `notification ${type}`;
+
+      let icon = '';
+      switch (type) {
+        case 'success':
+          icon = 'bi-save-fill';
+          break;
+        case 'info':
+          icon = 'bi-arrow-clockwise';
+          break;
+        case 'warning':
+          icon = 'bi-exclamation-circle-fill';
+          break;
+        case 'error':
+          icon = 'bi-trash-fill';
+          break;
+        case 'primary':
+          icon = 'bi-clipboard-check-fill';
+          break;
+        default:
+          icon = 'bi-info-circle-fill';
+      }
+
+      notification.innerHTML = `
+        <i class="bi ${icon}"></i>
+        <span class="notification-content">${message}</span>
+        <button class="notification-close" onclick="removeNotification('${notificationId}')">
+          <i class="bi bi-x"></i>
+        </button>
+      `;
+
+      notificationsContainer.appendChild(notification);
+
+      setTimeout(() => {
+        removeNotification(notificationId);
+      }, 3000);
+    }
+
+    function removeNotification(id) {
+      const notification = document.getElementById(id);
+      if (notification) {
+        notification.style.opacity = '0';
+        notification.style.transform = 'translateX(50px)';
+        setTimeout(() => {
+          if (notification.parentNode) {
+            notification.parentNode.removeChild(notification);
+          }
+        }, 400);
+      }
+    }
+
+    window.onclick = function (event) {
+      const modal = document.getElementById("remarkModal");
+      if (event.target === modal) {
+        closeRemarkModal();
+      }
+    }
+
+    document.addEventListener('keydown', function (event) {
+      if (event.key === 'Escape') {
+        closeRemarkModal();
+      }
+    });
+
+    // 调整左右面板平衡
+    function adjustPanelHeight() {
+      const container = document.querySelector('.container');
+      const contentWrapper = document.querySelector('.content-wrapper');
+      const leftPanel = document.querySelector('.left-panel');
+      const rightPanel = document.querySelector('.right-panel');
+
+      if (window.innerWidth <= 1200) {
+        contentWrapper.style.height = 'auto';
+        leftPanel.style.height = 'auto';
+      } else {
+        const containerHeight = container.offsetHeight;
+        contentWrapper.style.height = (containerHeight - 40) + 'px';
+        leftPanel.style.height = '100%';
+        rightPanel.style.height = '100%';
+      }
+    }
+
+    window.addEventListener('load', function () {
+      renderCompanyTable();
+      renderCommonInfo();
+      updateSummary();
+      adjustPanelHeight();
+
+      document.addEventListener('keydown', function (event) {
+        if ((event.ctrlKey || event.metaKey) && event.key === 's') {
+          event.preventDefault();
+          saveData();
+        }
+      });
+
+      window.addEventListener('resize', adjustPanelHeight);
+    });
+  </script>
+</body>
+
+</html>
